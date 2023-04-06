@@ -14,7 +14,7 @@ function App() {
   };
   return (
     <>
-      <context.Provider value={data}>
+      {/* <context.Provider value={data}> */}
         <BrowserRouter>
           {/* <HomeComponent /> */}
           <Navbar /> 
@@ -27,7 +27,7 @@ function App() {
             <Route path="/about" Component={AboutComponent}></Route>
           </Routes>
         </BrowserRouter>
-      </context.Provider>
+      {/* </context.Provider> */}
     </>
   );
 }

@@ -49,7 +49,7 @@ exports.login = [
           } else if (match) {
             const token = jwt.sign(user.toJSON(), "123hgdhd3321owb");
             console.log("token,", token);
-            return response.success(res, { token: token });
+            return response.success(res, { token: token ,"name":user.name});
           } else {
             return response.fail(res, "password not matched");
           }
