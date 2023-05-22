@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.cards{ 
+ box-shadow: #61dafb !important;
+ /* padding-left: 41px !important; */
+ border-radius: 10px;
+ border: 2px solid rgb(230, 212, 247);
+ align-items:center ;
+ height: 70vh;
+ max-width: 30vw !important;
+ margin: 10px;
+}

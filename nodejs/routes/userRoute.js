@@ -5,5 +5,6 @@ router.get('/',userController.sample)
 router.post('/register',userController.register)
 router.post('/login',userController.login)
 router.patch('/update/:id',userController.update)
+router.get('/getAllUsers',userController.sample)
 
 module.exports=router

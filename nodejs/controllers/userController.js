@@ -7,11 +7,11 @@ const response = require("../helpers/helpers");
 const jwt = require("jsonwebtoken");
 const { config } = require("dotenv");
 
-exports.sample = async(req, res) => {
+exports.sample = async (req, res) => {
   try {
-   const results=await UserModel.find({},{__v:0,password:0})
+    const results = await UserModel.find({}, { __v: 0, password: 0 });
     // return res.status(200).json("success");
-    return response.success(res,results)
+    return response.success(res, results);
   } catch (err) {
     throw err;
   }
@@ -24,6 +24,7 @@ exports.register = [
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        role:req.body.role 
       });
       const result = await user.save();
       // res.send(result)
@@ -41,15 +42,15 @@ exports.login = [
       if (!user) {
         response.fail(res, `no user with this data${req.body.email}`);
       } else {
-        console.log("**", user.password, req.body.password);
+        console.log("**", user);
 
         bcrypt.compare(req.body.password, user.password, (err, match) => {
           if (err) {
             return response.fail(res, err);
           } else if (match) {
             const token = jwt.sign(user.toJSON(), "123hgdhd3321owb");
-            console.log("token,", token);
-            return response.success(res, { token: token ,"name":user.name});
+            // console.log("token,", token);
+            return response.success(res, {  name: user.name ,role:user.role,token: token,});
           } else {
             return response.fail(res, "password not matched");
           }
@@ -63,7 +64,13 @@ exports.update = [
   (req, res) => {
     UserModel.findOneAndUpdate(
       { _id: req.params.id },
-      { $set: { name: req.body.name, email: req.body.email,password:req.body.password } }
+      {
+        $set: {
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+        },
+      }
     ).then((result) => {
       console.log("res", result);
       return response.success(res, "updated!!");

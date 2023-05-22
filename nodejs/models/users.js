@@ -5,7 +5,9 @@ const user = new mongoose.Schema({
   name: { type: String },
   email: { type: String, unique: true },
   password: { type: String },
-});
+  role:{type:"string",default:"user"}
+  
+},{timestamps:true});
 
 // user.pre("save", function save(next) {
 //     const user = this;
@@ -21,13 +23,13 @@ const user = new mongoose.Schema({
 // });
 user.pre("save",  function save(next) {
   const user = this;
-  console.log("user", user);
+  // console.log("user", user);
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
-    console.log(salt);
+    // console.log(salt);
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) throw err;
-      console.log("hash", hash);
+      // console.log("hash", hash);
       user.password = hash;
       next();
     });
@@ -39,10 +41,10 @@ user.pre("findOneAndUpdate",  function findOneAndUpdate(next) {
     console.log("user***", user._update['$set'].password);
     bcrypt.genSalt(10, (err, salt) => {
       if (err) throw err;
-      console.log(salt);
+      // console.log(salt);
       bcrypt.hash(user._update['$set'].password, salt, (err, hash) => {
         if (err) throw err;
-        console.log("hash", hash);
+        // console.log("hash", hash);
         user._update['$set'].password = hash;
         next();
       });

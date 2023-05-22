@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import urls from "../constants/apiendpoints";
 
 
 const SignUpComponent = () => {
@@ -16,7 +17,7 @@ const SignUpComponent = () => {
   const handleSubmit=(evt)=>{
     evt.preventDefault(); 
     console.log("data:",data)
-    axios.post(`http://localhost:4000/register`,{"name":data?.name,"email":data?.email,"password":data?.password}).then(res=>{
+    axios.post(urls.register,{"name":data?.name,"email":data?.email,"password":data?.password}).then(res=>{
       console.log(res)
       if(res.data.status == "200")navigate('/login')
     })

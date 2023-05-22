@@ -6,12 +6,10 @@ import LoginComponent from "./components/LoginComponent";
 import SignUpComponent from "./components/SignUpComponent";
 import AboutComponent from "./components/AboutComponent";
 import Navbar from "./components/Navbar";
+import Addproductscomponent from "./components/Products/Addproductscomponent"
 export const context = React.createContext();
 function App() {
-  const data = {
-    name: "ram",
-    token: "232ddhcbjnjk",
-  };
+  
   return (
     <>
       {/* <context.Provider value={data}> */}
@@ -22,9 +20,10 @@ function App() {
             <Route path="/" Component={HomeComponent}>
               {" "}
             </Route>
-            <Route path="/login" Component={LoginComponent}></Route>
-            <Route path="/signup" Component={SignUpComponent}></Route>
-            <Route path="/about" Component={AboutComponent}></Route>
+            <Route exact path="/login" Component={LoginComponent}></Route>
+            <Route exact path="/signup" Component={SignUpComponent}></Route>
+            <Route exact path="/about" Component={AboutComponent}></Route>
+            <Route  exact path="/addproduct" Component={Addproductscomponent}></Route>
           </Routes>
         </BrowserRouter>
       {/* </context.Provider> */}

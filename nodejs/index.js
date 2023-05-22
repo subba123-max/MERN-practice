@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors=require('cors')
 const helpers=require('./helpers/helpers')
-
-
 dotenv.config({ path: ".env" });
 app.use(cors({origin:"http://localhost:3000"}),) //cors policy
 const userRoute=require("./routes/userRoute")
+const productRoute=require("./routes/productRoute")
+
 const url = process.env.MONGODB_URL;
 console.log("url:", url);
 // mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,11 +17,12 @@ let con = mongoose.connection;
 con.on("open", () => {
   console.log("db connected");
 
-  console.log("name:",helpers.data)
+  // console.log("name:",helpers.data)
 
 });
 app.use(express.json())
 app.use('/',userRoute)
+app.use('/products',productRoute)
 
 // 
 app.use(express.urlencoded({extended:false}))
